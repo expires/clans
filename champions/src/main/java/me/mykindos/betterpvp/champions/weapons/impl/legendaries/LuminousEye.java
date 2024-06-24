@@ -135,8 +135,9 @@ public class LuminousEye extends ChannelWeapon implements InteractWeapon, Legend
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
         if (event.getEntity() instanceof Egg egg) {
+            eggs.remove(egg);
             if (egg.getShooter() instanceof Player damager && event.getHitEntity() instanceof LivingEntity damagee && eggs.contains(egg)) {
-                eggs.remove(egg);
+                if(damager.getUniqueId() == damagee.getUniqueId()) return;
                 damagee.damage(5.0);
                 Location damageeLocation = damagee.getLocation();
                 World world = damagee.getWorld();
